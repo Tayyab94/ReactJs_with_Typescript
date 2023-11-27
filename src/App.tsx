@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
+import './App.css';
+import { IProduct } from './interfaces/IProduct';
+import ProdcutComponent from './components/prodcut';
 function App() {
+
+  const HandleAddToCart = (id: number) => {
+    console.log("Product id " + id + " clicked Now")
+  }
+  const [products, setProducts] = useState<IProduct[]>([
+    {
+      Id: 1,
+      name: "First One"
+    },
+    {
+      Id: 2,
+      name: "Second One"
+    },
+    {
+      Id: 3,
+      name: "thrid One"
+    },
+  ])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        products.map((item) => {
+          return <ProdcutComponent product={item} key={item.Id} HandleAddToCart={HandleAddToCart} />
+        })
+      }
     </div>
   );
 }
